@@ -2,13 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\TelegramAuthService;
+use App\Services\User\TelegramAuthService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
-use Illuminate\Support\Facades\Http;
-use DefStudio\Telegraph\Models\TelegraphBot;
-use Illuminate\Support\Facades\Log;
 
 class TelegramAuthController extends Controller
 {
