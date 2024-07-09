@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\Log;
 
 class TelegramChannelService
 {
+    public function getChannelsByUserId($user)
+    {
+        if (!$user) {
+            return null;
+        }
+        return $user->channels;
+    }
+
     public function handleBotAddedToChannel(array $data, TelegraphBot $bot): void
     {
         $data = json_decode(json_encode($data), true);
