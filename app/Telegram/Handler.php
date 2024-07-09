@@ -75,8 +75,12 @@ class Handler extends WebhookHandler
         if (isset($data['my_chat_member']['new_chat_member']['status']) && $data['my_chat_member']['new_chat_member']['status'] === 'left') {
             Log::info('Обнаружен статус выхода.');
             $channelName = $data['my_chat_member']['chat']['title'];
-            $chatId = $this->telegramChatService->getChatIdByTelegramUserId($data['my_chat_member']['from']['id']);
-            $this->sendMessageToUser($chatId, 'Бот был удален с канала!');
+            $chatId = $this->telegramChatService->getChatIdByChannelId($data['my_chat_member']['chat']['id']);
+            if ($chatId) {
+                $this->sendMessageToUser($chatId, 'Бот был удален с канала!');
+            } else {
+                Log::warning("Не удалось найти chat_id");
+            }
         }
     }
 

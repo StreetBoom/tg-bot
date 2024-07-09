@@ -50,7 +50,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Channel::class, 'user_channels')->withTimestamps();
     }
-    public function telegraphChat(): BelongsTo
+    public function telegraphChats(): BelongsTo
     {
         return $this->belongsTo(TelegraphChat::class, 'telegraph_chat_id');
     }
