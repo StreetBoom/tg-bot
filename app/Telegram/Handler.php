@@ -2,6 +2,7 @@
 
 namespace App\Telegram;
 
+use AllowDynamicProperties;
 use App\Services\Channel\TelegramChannelService;
 use App\Services\Chat\TelegramChatService;
 use App\Services\User\TelegramUserService;
@@ -18,7 +19,7 @@ use DefStudio\Telegraph\DTO\Message;
 use Illuminate\Support\Stringable;
 
 
-class Handler extends WebhookHandler
+#[AllowDynamicProperties] class Handler extends WebhookHandler
 {
     public function __construct(
                                 TelegramChannelService $telegramChannelService,
@@ -49,10 +50,15 @@ class Handler extends WebhookHandler
         $chatId = $this->chat->chat_id;
 
         $registrationUrl = route('telegram.auth.callback', ['chat_id' => $chatId]);
-        $this->reply("Добро пожаловать! Для авторизации пройдите по кнопке ниже:\n[Авторизация]($registrationUrl)");
+        $this->reply("Добро пожаловать! Перед использованием нашего бота нужно авторизоваться, для этого пройдите по кнопке ниже:\n[Авторизация]($registrationUrl)");
     }
 
 
+    /**
+     * @param Request $request
+     * @param TelegraphBot $bot
+     * @return void
+     */
     public function handle(Request $request, TelegraphBot $bot): void
     {
         $data = $request->all();
@@ -64,30 +70,33 @@ class Handler extends WebhookHandler
         }
     }
 
+    /**
+     * @param array $data
+     * @param TelegraphBot $bot
+     * @return void
+     */
     protected function handleChannelMember(array $data, TelegraphBot $bot): void
     {
-        $chatId = $data['my_chat_member']['from']['id'];
+        $chatUserId = $data['my_chat_member']['from']['id'];
+
+        //При добавление бота на канал
         if (isset($data['my_chat_member']['new_chat_member']['status']) && $data['my_chat_member']['new_chat_member']['status'] === 'administrator') {
-            $this->telegramChannelService->handleBotAddedToChannel($data, $bot);
-//            $this->sendMessageToUser($chatId, 'Бот был добавлен на канал!');
+               $message = $this->telegramChannelService->addChannel($data, $bot);
+
+                $this->telegramChatService->senMessage($chatUserId, $message);
+
         }
+        //При удаление бота с канала
 
         if (isset($data['my_chat_member']['new_chat_member']['status']) && $data['my_chat_member']['new_chat_member']['status'] === 'left') {
             Log::info('Обнаружен статус выхода.');
             $channelName = $data['my_chat_member']['chat']['title'];
-            $chatId = $this->telegramChatService->getChatIdByChannelId($data['my_chat_member']['chat']['id']);
-            if ($chatId) {
-                $this->sendMessageToUser($chatId, 'Бот был удален с канала!');
+            $chatUserId = $this->telegramChatService->getChatIdByChannelId($data['my_chat_member']['chat']['id']);
+            if ($chatUserId) {
+                $this->telegramChatService->senMessage($chatUserId, 'Бот был удален с канала!');
             } else {
                 Log::warning("Не удалось найти chat_id");
             }
         }
-    }
-
-    protected function sendMessageToUser(string $chatId, string $message): void
-    {
-        $this->telegraph->chat($chatId)
-            ->message($message)
-            ->send();
     }
 }

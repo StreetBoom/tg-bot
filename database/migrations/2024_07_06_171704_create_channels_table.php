@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->string('username');
             $table->string('avatar')->nullable();
+            $table->boolean('has_permissions')->default(false);
             $table->timestamps();
         });
     }

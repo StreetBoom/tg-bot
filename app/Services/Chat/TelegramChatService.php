@@ -7,12 +7,23 @@ use App\Models\Channel;
 use App\Models\User;
 use DefStudio\Telegraph\Models\TelegraphBot;
 use DefStudio\Telegraph\Models\TelegraphChat;
+use DefStudio\Telegraph\Telegraph;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class TelegramChatService
 {
+    private Telegraph $telegraph;
+
+    /**
+     * @param Telegraph $telegraph
+     */
+    public function __construct(Telegraph $telegraph)
+    {
+        $this->telegraph = $telegraph;
+    }
+
     /**
      * Получение идентификатора чата по идентификатору пользователя Telegram.
      *
@@ -42,5 +53,19 @@ class TelegramChatService
             }
         }
         return null;
+    }
+
+    /**
+     * Отправляет сообщение пользователю в чат
+     *
+     * @param string $chatId
+     * @param string $message
+     * @return void
+     */
+    public function senMessage(string $chatId, string $message): void
+    {
+        $this->telegraph->chat($chatId)
+            ->message($message)
+            ->send();
     }
 }
