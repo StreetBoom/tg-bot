@@ -25,5 +25,5 @@ Route::get('/dashboard', function () {
 Route::get('/auth/telegram', [TelegramAuthController::class, 'redirectToTelegram'])->name('telegram.auth');
 Route::get('/auth/telegram/callback', [TelegramAuthController::class, 'handleTelegramCallback'])->name('telegram.auth.callback');
 
-Route::middleware('telegram_auth')->get('user/channels', [TelegramController::class, 'getChannelsByUserId'])->name('user.channels');
+Route::middleware('telegram_auth')->get('get-channels', [TelegramController::class, 'getChannelsByUserId'])->name('user.channels');
 

@@ -15,9 +15,10 @@ class ChannelsResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'title' => $this->title,
+            'channel_id' => $this->channel_id,
+            'channel_name' => $this->title,
             'username' => $this->username,
-            'avatar' => $this->avarar,
+            'avatar' => $this->avatar,
         ];
     }
 }
