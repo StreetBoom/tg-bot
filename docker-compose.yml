@@ -13,6 +13,7 @@ services:
         container_name: tg_bot_nginx
         depends_on:
             - app
+
     app:
         build:
             context: docker/app/dev
@@ -21,8 +22,13 @@ services:
             - ./:/var/www/html
             - ./docker/socket:/socket
         container_name: tg_bot_app
+        user: "${UID}:${GID}"
+        environment:
+            - UID=${UID}
+            - GID=${GID}
         depends_on:
             - db
+
     db:
         image: mysql:latest
         restart: always
@@ -34,4 +40,3 @@ services:
             - "3306:3306"
         volumes:
             - ./docker/mysql/data:/var/lib/mysql
-        #      - ./docker/mysql/dump:/docker-entrypoint-initdb.d
