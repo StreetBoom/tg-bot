@@ -1,6 +1,0 @@
-172.24.0.1 - - [30/Mar/2024:13:25:24 +0000] "GET / HTTP/1.1" 500 1128801 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
-172.25.0.1 - - [30/Mar/2024:13:28:29 +0000] "GET / HTTP/1.1" 500 1224520 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
-172.25.0.1 - - [30/Mar/2024:13:29:02 +0000] "GET / HTTP/1.1" 500 1128063 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
-172.25.0.1 - - [30/Mar/2024:13:29:02 +0000] "GET /_ignition/health-check HTTP/1.1" 200 40 "http://localhost/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
-172.25.0.1 - - [30/Mar/2024:13:29:15 +0000] "GET / HTTP/1.1" 200 34071 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
-172.25.0.1 - - [30/Mar/2024:13:30:11 +0000] "GET / HTTP/1.1" 200 34071 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"

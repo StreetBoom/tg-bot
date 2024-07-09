@@ -1,6 +1,6 @@
 2024/03/30 13:24:47 [notice] 1#1: using the "epoll" event method
 2024/03/30 13:24:47 [notice] 1#1: nginx/1.25.0
-2024/03/30 13:24:47 [notice] 1#1: built by gcc 10.2.1 20210110 (Debian 10.2.1-6) 
+2024/03/30 13:24:47 [notice] 1#1: built by gcc 10.2.1 20210110 (Debian 10.2.1-6)
 2024/03/30 13:24:47 [notice] 1#1: OS: Linux 5.15.49-linuxkit-pr
 2024/03/30 13:24:47 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
 2024/03/30 13:24:47 [notice] 1#1: start worker processes
@@ -33,7 +33,7 @@
 2024/03/30 13:25:43 [notice] 1#1: exit
 2024/03/30 13:28:22 [notice] 1#1: using the "epoll" event method
 2024/03/30 13:28:22 [notice] 1#1: nginx/1.25.0
-2024/03/30 13:28:22 [notice] 1#1: built by gcc 10.2.1 20210110 (Debian 10.2.1-6) 
+2024/03/30 13:28:22 [notice] 1#1: built by gcc 10.2.1 20210110 (Debian 10.2.1-6)
 2024/03/30 13:28:22 [notice] 1#1: OS: Linux 5.15.49-linuxkit-pr
 2024/03/30 13:28:22 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
 2024/03/30 13:28:22 [notice] 1#1: start worker processes
@@ -43,7 +43,7 @@
 2024/03/30 13:28:22 [notice] 1#1: start worker process 23
 2024/03/30 17:06:11 [notice] 1#1: using the "epoll" event method
 2024/03/30 17:06:11 [notice] 1#1: nginx/1.25.0
-2024/03/30 17:06:11 [notice] 1#1: built by gcc 10.2.1 20210110 (Debian 10.2.1-6) 
+2024/03/30 17:06:11 [notice] 1#1: built by gcc 10.2.1 20210110 (Debian 10.2.1-6)
 2024/03/30 17:06:11 [notice] 1#1: OS: Linux 5.15.49-linuxkit-pr
 2024/03/30 17:06:11 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
 2024/03/30 17:06:11 [notice] 1#1: start worker processes
@@ -53,7 +53,7 @@
 2024/03/30 17:06:11 [notice] 1#1: start worker process 23
 2024/07/05 14:22:44 [notice] 1#1: using the "epoll" event method
 2024/07/05 14:22:44 [notice] 1#1: nginx/1.27.0
-2024/07/05 14:22:44 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2024/07/05 14:22:44 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14)
 2024/07/05 14:22:44 [notice] 1#1: OS: Linux 6.8.0-36-generic
 2024/07/05 14:22:44 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
 2024/07/05 14:22:44 [notice] 1#1: start worker processes
@@ -191,7 +191,7 @@
 2024/07/05 14:27:49 [notice] 1#1: exit
 2024/07/05 14:28:13 [notice] 1#1: using the "epoll" event method
 2024/07/05 14:28:13 [notice] 1#1: nginx/1.27.0
-2024/07/05 14:28:13 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2024/07/05 14:28:13 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14)
 2024/07/05 14:28:13 [notice] 1#1: OS: Linux 6.8.0-36-generic
 2024/07/05 14:28:13 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
 2024/07/05 14:28:13 [notice] 1#1: start worker processes
@@ -359,7 +359,7 @@
 2024/07/06 01:27:06 [notice] 1#1: exit
 2024/07/06 16:43:00 [notice] 1#1: using the "epoll" event method
 2024/07/06 16:43:00 [notice] 1#1: nginx/1.27.0
-2024/07/06 16:43:00 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2024/07/06 16:43:00 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14)
 2024/07/06 16:43:00 [notice] 1#1: OS: Linux 6.8.0-36-generic
 2024/07/06 16:43:00 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
 2024/07/06 16:43:00 [notice] 1#1: start worker processes
@@ -508,7 +508,7 @@
 2024/07/06 20:09:03 [notice] 1#1: exit
 2024/07/07 12:31:27 [notice] 1#1: using the "epoll" event method
 2024/07/07 12:31:27 [notice] 1#1: nginx/1.27.0
-2024/07/07 12:31:27 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2024/07/07 12:31:27 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14)
 2024/07/07 12:31:27 [notice] 1#1: OS: Linux 6.8.0-36-generic
 2024/07/07 12:31:27 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
 2024/07/07 12:31:27 [notice] 1#1: start worker processes
@@ -641,7 +641,7 @@
 2024/07/07 13:50:03 [notice] 1#1: exit
 2024/07/07 13:50:03 [notice] 1#1: using the "epoll" event method
 2024/07/07 13:50:03 [notice] 1#1: nginx/1.27.0
-2024/07/07 13:50:03 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2024/07/07 13:50:03 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14)
 2024/07/07 13:50:03 [notice] 1#1: OS: Linux 6.8.0-36-generic
 2024/07/07 13:50:03 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
 2024/07/07 13:50:03 [notice] 1#1: start worker processes
@@ -774,7 +774,7 @@
 2024/07/07 14:09:49 [notice] 1#1: exit
 2024/07/07 14:09:50 [notice] 1#1: using the "epoll" event method
 2024/07/07 14:09:50 [notice] 1#1: nginx/1.27.0
-2024/07/07 14:09:50 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2024/07/07 14:09:50 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14)
 2024/07/07 14:09:50 [notice] 1#1: OS: Linux 6.8.0-36-generic
 2024/07/07 14:09:50 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
 2024/07/07 14:09:50 [notice] 1#1: start worker processes
@@ -903,7 +903,7 @@
 2024/07/07 14:23:57 [notice] 1#1: exit
 2024/07/07 14:24:11 [notice] 1#1: using the "epoll" event method
 2024/07/07 14:24:11 [notice] 1#1: nginx/1.27.0
-2024/07/07 14:24:11 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2024/07/07 14:24:11 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14)
 2024/07/07 14:24:11 [notice] 1#1: OS: Linux 6.8.0-36-generic
 2024/07/07 14:24:11 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
 2024/07/07 14:24:11 [notice] 1#1: start worker processes
@@ -1048,7 +1048,7 @@
 2024/07/07 19:36:25 [notice] 1#1: exit
 2024/07/08 09:39:21 [notice] 1#1: using the "epoll" event method
 2024/07/08 09:39:21 [notice] 1#1: nginx/1.27.0
-2024/07/08 09:39:21 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2024/07/08 09:39:21 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14)
 2024/07/08 09:39:21 [notice] 1#1: OS: Linux 6.8.0-36-generic
 2024/07/08 09:39:21 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
 2024/07/08 09:39:21 [notice] 1#1: start worker processes
@@ -1074,169 +1074,3 @@
 2024/07/08 09:39:21 [notice] 1#1: start worker process 39
 2024/07/08 09:40:39 [error] 22#22: *8 open() "/var/www/html/public/images/bg-hero.jpg" failed (2: No such file or directory), client: 172.23.0.1, server: tg-bot.test, request: "GET /images/bg-hero.jpg HTTP/1.1", host: "f58b-178-64-250-117.ngrok-free.app", referrer: "https://f58b-178-64-250-117.ngrok-free.app/"
 2024/07/08 09:40:48 [error] 21#21: *3 open() "/var/www/html/public/images/bg-hero.jpg" failed (2: No such file or directory), client: 172.23.0.1, server: tg-bot.test, request: "GET /images/bg-hero.jpg HTTP/1.1", host: "f58b-178-64-250-117.ngrok-free.app", referrer: "https://f58b-178-64-250-117.ngrok-free.app/"
-2024/07/08 12:04:37 [error] 33#33: *42 open() "/var/www/html/public/images/bg-hero.jpg" failed (2: No such file or directory), client: 172.23.0.1, server: tg-bot.test, request: "GET /images/bg-hero.jpg HTTP/1.1", host: "f58b-178-64-250-117.ngrok-free.app", referrer: "https://f58b-178-64-250-117.ngrok-free.app/"
-2024/07/08 12:38:23 [error] 37#37: *57 open() "/var/www/html/public/images/bg-hero.jpg" failed (2: No such file or directory), client: 172.23.0.1, server: tg-bot.test, request: "GET /images/bg-hero.jpg HTTP/1.1", host: "f58b-178-64-250-117.ngrok-free.app", referrer: "https://f58b-178-64-250-117.ngrok-free.app/"
-2024/07/08 12:38:46 [error] 37#37: *57 open() "/var/www/html/public/images/bg-hero.jpg" failed (2: No such file or directory), client: 172.23.0.1, server: tg-bot.test, request: "GET /images/bg-hero.jpg HTTP/1.1", host: "f58b-178-64-250-117.ngrok-free.app", referrer: "https://f58b-178-64-250-117.ngrok-free.app/"
-2024/07/08 16:00:10 [error] 24#24: *340 open() "/var/www/html/public/images/bg-hero.jpg" failed (2: No such file or directory), client: 172.23.0.1, server: tg-bot.test, request: "GET /images/bg-hero.jpg HTTP/1.1", host: "f58b-178-64-250-117.ngrok-free.app", referrer: "https://f58b-178-64-250-117.ngrok-free.app/"
-2024/07/08 17:22:59 [error] 23#23: *471 open() "/var/www/html/public/images/bg-hero.jpg" failed (2: No such file or directory), client: 172.23.0.1, server: tg-bot.test, request: "GET /images/bg-hero.jpg HTTP/1.1", host: "f58b-178-64-250-117.ngrok-free.app", referrer: "https://f58b-178-64-250-117.ngrok-free.app/"
-2024/07/09 09:59:44 [notice] 1#1: using the "epoll" event method
-2024/07/09 09:59:44 [notice] 1#1: nginx/1.27.0
-2024/07/09 09:59:44 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) 
-2024/07/09 09:59:44 [notice] 1#1: OS: Linux 6.8.0-36-generic
-2024/07/09 09:59:44 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
-2024/07/09 09:59:44 [notice] 1#1: start worker processes
-2024/07/09 09:59:44 [notice] 1#1: start worker process 20
-2024/07/09 09:59:44 [notice] 1#1: start worker process 21
-2024/07/09 09:59:44 [notice] 1#1: start worker process 22
-2024/07/09 09:59:44 [notice] 1#1: start worker process 23
-2024/07/09 09:59:44 [notice] 1#1: start worker process 24
-2024/07/09 09:59:44 [notice] 1#1: start worker process 25
-2024/07/09 09:59:44 [notice] 1#1: start worker process 26
-2024/07/09 09:59:44 [notice] 1#1: start worker process 27
-2024/07/09 09:59:44 [notice] 1#1: start worker process 28
-2024/07/09 09:59:44 [notice] 1#1: start worker process 29
-2024/07/09 09:59:44 [notice] 1#1: start worker process 30
-2024/07/09 09:59:44 [notice] 1#1: start worker process 31
-2024/07/09 09:59:44 [notice] 1#1: start worker process 32
-2024/07/09 09:59:44 [notice] 1#1: start worker process 33
-2024/07/09 09:59:44 [notice] 1#1: start worker process 34
-2024/07/09 09:59:44 [notice] 1#1: start worker process 35
-2024/07/09 09:59:44 [notice] 1#1: start worker process 36
-2024/07/09 09:59:44 [notice] 1#1: start worker process 37
-2024/07/09 09:59:44 [notice] 1#1: start worker process 38
-2024/07/09 09:59:44 [notice] 1#1: start worker process 39
-2024/07/09 09:59:47 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
-2024/07/09 09:59:47 [notice] 20#20: gracefully shutting down
-2024/07/09 09:59:47 [notice] 21#21: gracefully shutting down
-2024/07/09 09:59:47 [notice] 25#25: gracefully shutting down
-2024/07/09 09:59:47 [notice] 24#24: gracefully shutting down
-2024/07/09 09:59:47 [notice] 20#20: exiting
-2024/07/09 09:59:47 [notice] 30#30: gracefully shutting down
-2024/07/09 09:59:47 [notice] 22#22: gracefully shutting down
-2024/07/09 09:59:47 [notice] 23#23: gracefully shutting down
-2024/07/09 09:59:47 [notice] 30#30: exiting
-2024/07/09 09:59:47 [notice] 21#21: exiting
-2024/07/09 09:59:47 [notice] 39#39: gracefully shutting down
-2024/07/09 09:59:47 [notice] 26#26: gracefully shutting down
-2024/07/09 09:59:47 [notice] 31#31: gracefully shutting down
-2024/07/09 09:59:47 [notice] 25#25: exiting
-2024/07/09 09:59:47 [notice] 33#33: gracefully shutting down
-2024/07/09 09:59:47 [notice] 32#32: gracefully shutting down
-2024/07/09 09:59:47 [notice] 34#34: gracefully shutting down
-2024/07/09 09:59:47 [notice] 28#28: gracefully shutting down
-2024/07/09 09:59:47 [notice] 29#29: gracefully shutting down
-2024/07/09 09:59:47 [notice] 27#27: gracefully shutting down
-2024/07/09 09:59:47 [notice] 24#24: exiting
-2024/07/09 09:59:47 [notice] 38#38: gracefully shutting down
-2024/07/09 09:59:47 [notice] 35#35: gracefully shutting down
-2024/07/09 09:59:47 [notice] 22#22: exiting
-2024/07/09 09:59:47 [notice] 23#23: exiting
-2024/07/09 09:59:47 [notice] 39#39: exiting
-2024/07/09 09:59:47 [notice] 20#20: exit
-2024/07/09 09:59:47 [notice] 31#31: exiting
-2024/07/09 09:59:47 [notice] 33#33: exiting
-2024/07/09 09:59:47 [notice] 30#30: exit
-2024/07/09 09:59:47 [notice] 21#21: exit
-2024/07/09 09:59:47 [notice] 32#32: exiting
-2024/07/09 09:59:47 [notice] 34#34: exiting
-2024/07/09 09:59:47 [notice] 28#28: exiting
-2024/07/09 09:59:47 [notice] 29#29: exiting
-2024/07/09 09:59:47 [notice] 27#27: exiting
-2024/07/09 09:59:47 [notice] 38#38: exiting
-2024/07/09 09:59:47 [notice] 24#24: exit
-2024/07/09 09:59:47 [notice] 25#25: exit
-2024/07/09 09:59:47 [notice] 35#35: exiting
-2024/07/09 09:59:47 [notice] 22#22: exit
-2024/07/09 09:59:47 [notice] 39#39: exit
-2024/07/09 09:59:47 [notice] 33#33: exit
-2024/07/09 09:59:47 [notice] 31#31: exit
-2024/07/09 09:59:47 [notice] 23#23: exit
-2024/07/09 09:59:47 [notice] 34#34: exit
-2024/07/09 09:59:47 [notice] 28#28: exit
-2024/07/09 09:59:47 [notice] 29#29: exit
-2024/07/09 09:59:47 [notice] 32#32: exit
-2024/07/09 09:59:47 [notice] 27#27: exit
-2024/07/09 09:59:47 [notice] 38#38: exit
-2024/07/09 09:59:47 [notice] 35#35: exit
-2024/07/09 09:59:47 [notice] 37#37: gracefully shutting down
-2024/07/09 09:59:47 [notice] 37#37: exiting
-2024/07/09 09:59:47 [notice] 37#37: exit
-2024/07/09 09:59:47 [notice] 36#36: gracefully shutting down
-2024/07/09 09:59:47 [notice] 36#36: exiting
-2024/07/09 09:59:47 [notice] 36#36: exit
-2024/07/09 09:59:47 [notice] 26#26: exiting
-2024/07/09 09:59:47 [notice] 26#26: exit
-2024/07/09 09:59:47 [notice] 1#1: signal 17 (SIGCHLD) received from 25
-2024/07/09 09:59:47 [notice] 1#1: worker process 21 exited with code 0
-2024/07/09 09:59:47 [notice] 1#1: worker process 25 exited with code 0
-2024/07/09 09:59:47 [notice] 1#1: signal 29 (SIGIO) received
-2024/07/09 09:59:47 [notice] 1#1: signal 17 (SIGCHLD) received from 21
-2024/07/09 09:59:47 [notice] 1#1: worker process 37 exited with code 0
-2024/07/09 09:59:47 [notice] 1#1: signal 29 (SIGIO) received
-2024/07/09 09:59:47 [notice] 1#1: signal 17 (SIGCHLD) received from 23
-2024/07/09 09:59:47 [notice] 1#1: worker process 23 exited with code 0
-2024/07/09 09:59:47 [notice] 1#1: signal 29 (SIGIO) received
-2024/07/09 09:59:47 [notice] 1#1: signal 17 (SIGCHLD) received from 22
-2024/07/09 09:59:47 [notice] 1#1: worker process 22 exited with code 0
-2024/07/09 09:59:47 [notice] 1#1: signal 29 (SIGIO) received
-2024/07/09 09:59:48 [notice] 1#1: signal 17 (SIGCHLD) received from 32
-2024/07/09 09:59:48 [notice] 1#1: worker process 24 exited with code 0
-2024/07/09 09:59:48 [notice] 1#1: worker process 27 exited with code 0
-2024/07/09 09:59:48 [notice] 1#1: worker process 29 exited with code 0
-2024/07/09 09:59:48 [notice] 1#1: worker process 32 exited with code 0
-2024/07/09 09:59:48 [notice] 1#1: worker process 20 exited with code 0
-2024/07/09 09:59:48 [notice] 1#1: worker process 35 exited with code 0
-2024/07/09 09:59:48 [notice] 1#1: signal 29 (SIGIO) received
-2024/07/09 09:59:48 [notice] 1#1: signal 17 (SIGCHLD) received from 35
-2024/07/09 09:59:48 [notice] 1#1: signal 17 (SIGCHLD) received from 28
-2024/07/09 09:59:48 [notice] 1#1: worker process 28 exited with code 0
-2024/07/09 09:59:48 [notice] 1#1: signal 29 (SIGIO) received
-2024/07/09 09:59:48 [notice] 1#1: signal 17 (SIGCHLD) received from 33
-2024/07/09 09:59:48 [notice] 1#1: worker process 33 exited with code 0
-2024/07/09 09:59:48 [notice] 1#1: worker process 38 exited with code 0
-2024/07/09 09:59:48 [notice] 1#1: signal 29 (SIGIO) received
-2024/07/09 09:59:48 [notice] 1#1: signal 17 (SIGCHLD) received from 34
-2024/07/09 09:59:48 [notice] 1#1: worker process 34 exited with code 0
-2024/07/09 09:59:48 [notice] 1#1: signal 29 (SIGIO) received
-2024/07/09 09:59:48 [notice] 1#1: signal 17 (SIGCHLD) received from 31
-2024/07/09 09:59:48 [notice] 1#1: worker process 31 exited with code 0
-2024/07/09 09:59:48 [notice] 1#1: signal 29 (SIGIO) received
-2024/07/09 09:59:48 [notice] 1#1: signal 17 (SIGCHLD) received from 26
-2024/07/09 09:59:48 [notice] 1#1: worker process 26 exited with code 0
-2024/07/09 09:59:48 [notice] 1#1: signal 29 (SIGIO) received
-2024/07/09 09:59:48 [notice] 1#1: signal 17 (SIGCHLD) received from 36
-2024/07/09 09:59:48 [notice] 1#1: worker process 36 exited with code 0
-2024/07/09 09:59:48 [notice] 1#1: signal 29 (SIGIO) received
-2024/07/09 09:59:48 [notice] 1#1: signal 17 (SIGCHLD) received from 30
-2024/07/09 09:59:48 [notice] 1#1: worker process 30 exited with code 0
-2024/07/09 09:59:48 [notice] 1#1: signal 29 (SIGIO) received
-2024/07/09 09:59:48 [notice] 1#1: signal 17 (SIGCHLD) received from 39
-2024/07/09 09:59:48 [notice] 1#1: worker process 39 exited with code 0
-2024/07/09 09:59:48 [notice] 1#1: exit
-2024/07/09 10:03:00 [notice] 1#1: using the "epoll" event method
-2024/07/09 10:03:00 [notice] 1#1: nginx/1.27.0
-2024/07/09 10:03:00 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) 
-2024/07/09 10:03:00 [notice] 1#1: OS: Linux 6.8.0-36-generic
-2024/07/09 10:03:00 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
-2024/07/09 10:03:00 [notice] 1#1: start worker processes
-2024/07/09 10:03:00 [notice] 1#1: start worker process 20
-2024/07/09 10:03:00 [notice] 1#1: start worker process 21
-2024/07/09 10:03:00 [notice] 1#1: start worker process 22
-2024/07/09 10:03:00 [notice] 1#1: start worker process 23
-2024/07/09 10:03:00 [notice] 1#1: start worker process 24
-2024/07/09 10:03:00 [notice] 1#1: start worker process 25
-2024/07/09 10:03:00 [notice] 1#1: start worker process 26
-2024/07/09 10:03:00 [notice] 1#1: start worker process 27
-2024/07/09 10:03:00 [notice] 1#1: start worker process 28
-2024/07/09 10:03:00 [notice] 1#1: start worker process 29
-2024/07/09 10:03:00 [notice] 1#1: start worker process 30
-2024/07/09 10:03:00 [notice] 1#1: start worker process 31
-2024/07/09 10:03:00 [notice] 1#1: start worker process 32
-2024/07/09 10:03:00 [notice] 1#1: start worker process 33
-2024/07/09 10:03:00 [notice] 1#1: start worker process 34
-2024/07/09 10:03:00 [notice] 1#1: start worker process 35
-2024/07/09 10:03:00 [notice] 1#1: start worker process 36
-2024/07/09 10:03:00 [notice] 1#1: start worker process 37
-2024/07/09 10:03:00 [notice] 1#1: start worker process 38
-2024/07/09 10:03:00 [notice] 1#1: start worker process 39
-2024/07/09 10:03:56 [error] 20#20: *1 open() "/var/www/html/public/images/bg-hero.jpg" failed (2: No such file or directory), client: 172.27.0.1, server: tg-bot.test, request: "GET /images/bg-hero.jpg HTTP/1.1", host: "3253-178-64-250-117.ngrok-free.app", referrer: "https://3253-178-64-250-117.ngrok-free.app/"
