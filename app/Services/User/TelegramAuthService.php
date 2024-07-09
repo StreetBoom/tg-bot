@@ -4,14 +4,35 @@ namespace App\Services\User;
 
 use App\DTO\User\TelegramUserDTO;
 use App\Models\User;
+use App\Services\Chat\TelegramChatService;
 use DefStudio\Telegraph\Models\TelegraphBot;
 use DefStudio\Telegraph\Models\TelegraphChat;
+use DefStudio\Telegraph\Telegraph;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class TelegramAuthService
 {
+
+    /**
+     * @param Telegraph $telegraph
+     * @param TelegramChatService $telegramChatService
+     */
+    public function __construct(Telegraph           $telegraph,
+                                TelegramChatService $telegramChatService)
+    {
+        $this->telegramChatService = $telegramChatService;
+        $this->telegraph = $telegraph;
+    }
+
+
+    /**
+     * Метод получает данные пользователя, связывает с чатом и сохраняет в базу
+     *
+     * @param int $chatId
+     * @return bool
+     */
     public function handleTelegramCallback(int $chatId): bool
     {
         $bot = TelegraphBot::first();
@@ -29,11 +50,12 @@ class TelegramAuthService
 
         // Проверяем, существует ли пользователь в базе данных
         $user = User::where('telegram_id', $data['id'])->first();
+        $isNewUser = false;
         $avatar = null;
 
         // Если пользователь не существует или у него нет аватара, скачиваем аватар
         if (!$user || !$user->avatar) {
-            $avatar = isset($data['photo']) ? $this->downloadUserProfilePhoto($bot->token, $data['photo']) : null;
+            $avatar = isset($data['photo']) ? $this->getUserProfilePhotoUrl($bot->token, $data['photo']) : null;
         }
 
         // Создаем DTO из данных
@@ -43,6 +65,10 @@ class TelegramAuthService
             'username' => $data['username'] ?? null,
             'avatar' => $avatar ?? $user->avatar ?? null, // Используем существующий аватар, если он есть
         ]);
+        // Логика авторизации
+        if (!$user) {
+            $isNewUser = true;
+        }
 
         // Логика авторизации
         $user = User::updateOrCreate(
@@ -63,10 +89,22 @@ class TelegramAuthService
 
         Auth::login($user);
 
+        // Отправляем сообщение пользователю об успешной регистрации, если это новый пользователь
+        if ($isNewUser) {
+            $this->telegramChatService->senMessage($chatId, 'Регистрация прошла успешно! Добро пожаловать! Теперь вы можете добавить меня к себе на канал! не забудьте выдать мне нужные права');
+        }
+
         return true;
     }
 
-    private function downloadUserProfilePhoto(string $botToken, array $photo): ?string
+    /**
+     * Метод скачивает фото пользователя и сохраняет его
+     *
+     * @param string $botToken
+     * @param array $photo
+     * @return string|null
+     */
+    private function getUserProfilePhotoUrl(string $botToken, array $photo): ?string
     {
         $fileId = $photo['big_file_id']; // Используем big_file_id для лучшего качества
 
@@ -81,17 +119,9 @@ class TelegramAuthService
             $filePath = $fileInfo['result']['file_path'];
             $fileUrl = "https://api.telegram.org/file/bot{$botToken}/{$filePath}";
 
-            // Скачиваем файл
-            $fileContent = Http::get($fileUrl)->body();
+            Log::info("Получен URL аватара: {$fileUrl}");
 
-            // Генерируем уникальное имя файла и сохраняем его в публичную директорию
-            $fileName = 'avatars/' . uniqid() . '.jpg';
-            $publicPath = public_path($fileName);
-            file_put_contents($publicPath, $fileContent);
-
-            Log::info("Файл скачан и сохранен как: {$publicPath}");
-
-            return url($fileName);
+            return $fileUrl;
         } else {
             Log::error("Ошибка при получении информации о файле: " . $fileInfo['description']);
             return null;

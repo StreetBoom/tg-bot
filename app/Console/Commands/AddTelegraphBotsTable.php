@@ -30,6 +30,7 @@ class AddTelegraphBotsTable extends Command
         if (TelegraphBot::count() == 0) {
             TelegraphBot::create([
                 'token' => '7437300242:AAHdjU8VqdhPivMFf2j0G4734V2Vt9ydUDg',
+                //7437300242:AAHdjU8VqdhPivMFf2j0G4734V2Vt9ydUDg  Egor
                 'name' => 'SvvkrusTestBot',
             ]);
 
