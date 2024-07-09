@@ -6,21 +6,3 @@ const userMeta = document.querySelector('meta[name="user"]');
 const user = userMeta ? JSON.parse(userMeta.getAttribute('content')) : { isAuthenticated: false };
 
 document.querySelector('#app').innerHTML = Dashboard(user);
-
-// Функция для загрузки каналов
-function loadChannels() {
-    fetch('/get-channels')
-        .then(response => response.json())
-        .then(data => {
-            const channelList = document.getElementById('channel-list');
-            channelList.innerHTML = '';
-            data.forEach(channel => {
-                const li = document.createElement('li');
-                li.textContent = `${channel.channel_name} (ID: ${channel.channel_id})`;
-                channelList.appendChild(li);
-            });
-        });
-}
-
-// Загрузка каналов при загрузке страницы
-loadChannels();
