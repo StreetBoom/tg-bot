@@ -10,32 +10,6 @@ use Illuminate\Support\Facades\Log;
 
 class TelegramChannelService
 {
-
-    public function getChannelInfo(array $data): ?array
-    {
-        $bot = TelegraphBot::first();
-        $channelId = $data['my_chat_member']['chat']['id'];
-
-        // Выполняем запрос к API Telegram для получения данных о канале
-        $response = Http::post("https://api.telegram.org/bot{$bot->token}/getChat", [
-            'chat_id' => $channelId,
-        ]);
-
-        if ($response->successful()) {
-            $chatData = $response->json();
-            if (isset($chatData['result'])) {
-                Log::info("Данные о канале получены: " . json_encode($chatData['result'], JSON_UNESCAPED_UNICODE));
-                return $chatData['result'];
-            } else {
-                Log::warning("Не удалось получить данные о канале. Ответ API: " . json_encode($chatData, JSON_UNESCAPED_UNICODE));
-                return null;
-            }
-        } else {
-            Log::error("Ошибка при выполнении запроса к API Telegram: " . $response->body());
-            return null;
-        }
-    }
-
     public function handleBotAddedToChannel(array $data, TelegraphBot $bot): void
     {
         $data = json_decode(json_encode($data), true);

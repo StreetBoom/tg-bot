@@ -3,7 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use DefStudio\Telegraph\Models\TelegraphChat;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -41,8 +44,14 @@ class User extends Authenticatable
         ];
     }
 
-    public function channels()
+
+
+    public function channels(): BelongsToMany
     {
-        return $this->hasMany(Channel::class);
+        return $this->belongsToMany(Channel::class, 'user_channels')->withTimestamps();
+    }
+    public function telegraphChats(): BelongsTo
+    {
+        return $this->belongsTo(TelegraphChat::class, 'telegraph_chat_id');
     }
 }
