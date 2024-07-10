@@ -1,0 +1,93 @@
+/* Navbar */
+.navbar {
+    background: #333;
+    padding: 15px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar .navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif; /* Добавляем красивый шрифт */
+}
+
+.navbar .nav-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-left: auto; /* Перемещаем ссылки вправо */
+}
+
+.navbar .nav-links a,
+.navbar .nav-links button {
+    text-decoration: none;
+    color: #ccc;
+    font-size: 1rem;
+    transition: color 0.3s, transform 0.3s;
+    height: 100%; /* Занимает всю высоту навбара */
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font: inherit; /* Наследует шрифтовые стили */
+}
+
+.navbar .nav-links a:hover,
+.navbar .nav-links button:hover {
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.navbar .btn {
+    background: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background 0.3s, transform 0.3s;
+    height: 100%; /* Занимает всю высоту навбара */
+    display: flex;
+    align-items: center;
+}
+
+.navbar .btn:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+}
+
+.navbar .user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.navbar .user-info .avatar {
+    border-radius: 50%;
+    width: 80px; /* Уменьшить размер для компактности */
+    height: 80px;
+    border: 2px solid #007bff;
+}
+
+.navbar .user-info .btn-logout {
+    background: #ff4d4d;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.navbar .user-info .btn-logout:hover {
+    background: #ff1a1a;
+    transform: translateY(-2px);
+}

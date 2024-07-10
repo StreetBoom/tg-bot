@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\User\TelegramAuthService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TelegramAuthController extends Controller
 {
@@ -11,6 +12,7 @@ class TelegramAuthController extends Controller
     {
         $this->telegramAuthService = $telegramAuthService;
     }
+
     public function handleTelegramCallback(Request $request)
     {
         $chatId = $request->query('chat_id');
@@ -20,6 +22,14 @@ class TelegramAuthController extends Controller
             return redirect('/')->withErrors(['msg' => 'Invalid Telegram data']);
         }
 
-        return redirect()->route('home');    }
+        return redirect()->route('home');
+    }
 
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return response()->json(['message' => 'Logged out successfully'], 200);
+    }
 }
