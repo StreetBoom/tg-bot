@@ -1,0 +1,59 @@
+/* Модальное окно */
+.modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed; /* Остается на месте (фиксированное положение) */
+    z-index: 1; /* Находится на переднем плане */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ширина (заполняет весь экран) */
+    height: 100%; /* Высота (заполняет весь экран) */
+    overflow: auto; /* Включает прокрутку при необходимости */
+    background-color: rgba(0, 0, 0, 0.8); /* Черный цвет с непрозрачностью */
+}
+
+/* Модальное содержимое/Box */
+.modal-content {
+    background-color: #2e2e2e; /* Темный фон */
+    margin: 15% auto; /* 15% сверху и по центру */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Ширина */
+    max-width: 500px; /* Максимальная ширина */
+    text-align: center; /* Выравнивание текста по центру */
+    box-shadow: 0 5px 15px rgba(0,0,0,.5); /* Тень для модального окна */
+    border-radius: 10px;
+    color: #fff; /* Белый текст */
+}
+
+/* Кнопка закрытия */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Стили для кнопок внутри модального окна */
+.modal-content .btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.modal-content .btn:hover {
+    background-color: #0056b3;
+}
