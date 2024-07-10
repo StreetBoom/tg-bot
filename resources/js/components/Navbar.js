@@ -5,7 +5,7 @@ export default function Navbar(user, botName) {
     return `
     <nav class="navbar">
       <div class="container-navbar">
-        <a class="navbar-brand" href="#">${botName}</a>
+        <a class="navbar-brand" href="https://t.me/${botName}">${botName}</a>
         <div class="nav-links">
           ${user.isAuthenticated ? `
             <div class="user-info">

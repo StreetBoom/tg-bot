@@ -1,0 +1,69 @@
+.sidebar {
+    background: #333;
+    width: 250px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.sidebar .user-info {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar .user-info .avatar {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    border: 2px solid #007bff;
+    margin-bottom: 10px;
+}
+
+.sidebar .user-info .user-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.sidebar .menu {
+    width: 100%;
+}
+
+.sidebar .menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar .menu ul li {
+    margin-bottom: 10px;
+}
+
+.channel-button {
+    width: 100%;
+    padding: 10px 15px;
+    text-align: left;
+    background: #444;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+.channel-button:hover {
+    background: #007bff;
+    color: #fff;
+}
+
+.channel-avatar {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border: 2px solid #007bff;
+}
