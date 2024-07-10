@@ -17,6 +17,14 @@ class TelegramChannelService
         }
         return $user->channels()->get();
     }
+
+    /**
+     * Сохраняем данные подключеного канала
+     *
+     * @param array $data
+     * @param TelegraphBot $bot
+     * @return string
+     */
     public function addChannel(array $data, TelegraphBot $bot): string
     {
         $data = json_decode(json_encode($data), true);
@@ -67,6 +75,13 @@ class TelegramChannelService
         }
     }
 
+    /**
+     * Сохраняем фото канала
+     *
+     * @param string $botToken
+     * @param int $channelId
+     * @return string|null
+     */
     private function downloadChannelAvatar(string $botToken, int $channelId): ?string
     {
         // Получаем информацию о фото канала
@@ -97,13 +112,21 @@ class TelegramChannelService
             $fileContent = Http::get($fileUrl)->body();
 
             // Генерируем уникальное имя файла и сохраняем его в публичную директорию
-            $fileName = 'channel/' . uniqid() . '.jpg';
+            $fileName = "images/channelAvatars/{$channelId}.jpg";
             $publicPath = public_path($fileName);
+
+            // Проверяем директорию
+            $directory = public_path('images/channelAvatars');
+            if (!file_exists($directory)) {
+                mkdir($directory, 0777, true);
+            }
+
+            // Сохраняем файл
             file_put_contents($publicPath, $fileContent);
 
             Log::info("Файл скачан и сохранен как: {$publicPath}");
 
-            return url($fileName);
+            return "/images/channelAvatars/{$channelId}.jpg";
         } else {
             Log::error("Ошибка при получении информации о файле: " . $fileInfo['description']);
             return null;

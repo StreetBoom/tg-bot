@@ -23,10 +23,10 @@ use Illuminate\Support\Stringable;
 #[AllowDynamicProperties] class Handler extends WebhookHandler
 {
     public function __construct(
-                                TelegramChannelService $telegramChannelService,
-                                TelegramUserService $telegramUserService,
-                                TelegramChatService $telegramChatService,
-                                Telegraph $telegraph)
+        TelegramChannelService $telegramChannelService,
+        TelegramUserService    $telegramUserService,
+        TelegramChatService    $telegramChatService,
+        Telegraph              $telegraph)
 
     {
         $this->telegramChannelService = $telegramChannelService;
@@ -55,7 +55,6 @@ use Illuminate\Support\Stringable;
     }
 
 
-
     /**
      * @param Request $request
      * @param TelegraphBot $bot
@@ -64,16 +63,17 @@ use Illuminate\Support\Stringable;
     public function handle(Request $request, TelegraphBot $bot): void
     {
         $data = $request->all();
-        $command = StaticCommand::where('command',$data['message']['text'])->first();
-Log::info(json_encode(trim($data['message']['text'])));
-        if (isset($command)){
+        if (isset($data['message']['text'])){
+            $command = StaticCommand::where('command', $data['message']['text'])->first();
+        }
+        if (isset($data['my_chat_member']) && $data['my_chat_member']['chat']['type'] === 'channel') {
+            $this->handleChannelMember($data, $bot);
+
+        } elseif (isset($command)) {
             $staticCommand = StaticCommand::where('command', $data['message']['text'])->first();
 
-                // Отправляем сообщение, если команда найдена
-                $this->telegramChatService->sendMessage($data['message']['chat']['id'], $staticCommand->message);
-
-        } elseif (isset($data['my_chat_member']) && $data['my_chat_member']['chat']['type'] === 'channel') {
-            $this->handleChannelMember($data, $bot);
+            // Отправляем сообщение, если команда найдена
+            $this->telegramChatService->sendMessage($data['message']['chat']['id'], $staticCommand->message);
         } else {
             parent::handle($request, $bot);
         }
@@ -84,15 +84,16 @@ Log::info(json_encode(trim($data['message']['text'])));
      * @param TelegraphBot $bot
      * @return void
      */
-    protected function handleChannelMember(array $data, TelegraphBot $bot): void
+    protected
+    function handleChannelMember(array $data, TelegraphBot $bot): void
     {
         $chatUserId = $data['my_chat_member']['from']['id'];
 
         //При добавление бота на канал
         if (isset($data['my_chat_member']['new_chat_member']['status']) && $data['my_chat_member']['new_chat_member']['status'] === 'administrator') {
-               $message = $this->telegramChannelService->addChannel($data, $bot);
+            $message = $this->telegramChannelService->addChannel($data, $bot);
 
-                $this->telegramChatService->sendMessage($chatUserId, $message);
+            $this->telegramChatService->sendMessage($chatUserId, $message);
 
         }
         //При удаление бота с канала
