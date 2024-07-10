@@ -10,7 +10,7 @@ use DefStudio\Telegraph\Telegraph;
 
 Route::get('/', function () {
     $user = Auth::user();
-    return view('home', [
+    return view('index', [
         'user' => $user ? array_merge($user->only(['name', 'avatar']), ['isAuthenticated' => true]) : ['isAuthenticated' => false]
     ]);
 })->name('home');
