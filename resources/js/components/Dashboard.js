@@ -1,9 +1,13 @@
+
 export default function Dashboard(user) {
+    const defaultAvatar = '/images/default-avatar.webp';
+    const avatar = user.avatar ? user.avatar : defaultAvatar;
+
     return `
     <div class="dashboard">
       <aside class="sidebar">
         <div class="user-info">
-          <img src="${user.avatar}" alt="${user.name}" class="avatar">
+          <img src="${avatar}" alt="${user.name}" class="avatar">
           <span class="user-name">${user.name}</span>
         </div>
         <nav class="menu">

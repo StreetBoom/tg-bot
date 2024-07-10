@@ -10,33 +10,14 @@ use Illuminate\Support\Facades\Log;
 
 class TelegramChannelService
 {
-
-    public function getChannelInfo(array $data): ?array
+    public function getChannelsByUserId($user)
     {
-        $bot = TelegraphBot::first();
-        $channelId = $data['my_chat_member']['chat']['id'];
-
-        // Выполняем запрос к API Telegram для получения данных о канале
-        $response = Http::post("https://api.telegram.org/bot{$bot->token}/getChat", [
-            'chat_id' => $channelId,
-        ]);
-
-        if ($response->successful()) {
-            $chatData = $response->json();
-            if (isset($chatData['result'])) {
-                Log::info("Данные о канале получены: " . json_encode($chatData['result'], JSON_UNESCAPED_UNICODE));
-                return $chatData['result'];
-            } else {
-                Log::warning("Не удалось получить данные о канале. Ответ API: " . json_encode($chatData, JSON_UNESCAPED_UNICODE));
-                return null;
-            }
-        } else {
-            Log::error("Ошибка при выполнении запроса к API Telegram: " . $response->body());
+        if(!$user) {
             return null;
         }
+        return $user->channels()->get();
     }
-
-    public function handleBotAddedToChannel(array $data, TelegraphBot $bot): void
+    public function addChannel(array $data, TelegraphBot $bot): string
     {
         $data = json_decode(json_encode($data), true);
         Log::info('все данные', $data);
@@ -50,12 +31,22 @@ class TelegramChannelService
         $channel = Channel::where('channel_id', $channelId)->first();
 
         $avatar = null;
+
+        // Проверка прав
+        $hasPermissions = $this->hasPermissions($data['my_chat_member']['new_chat_member']);
+
+
         if (!$channel || !$channel->avatar) {
-            $avatar = $this->downloadChannelPhoto($bot->token, $channelId);
+            $avatar = $this->downloadChannelAvatar($bot->token, $channelId);
         }
         $channel = Channel::updateOrCreate(
             ['channel_id' => $channelId],
-            ['title' => $title, 'username' => $username, 'avatar' => $avatar ?? $channel->avatar ?? null]
+            [
+                'title' => $title,
+                'username' => $username,
+                'avatar' => $avatar ?? $channel->avatar ?? null,
+                'has_permissions' => $hasPermissions,
+            ]
         );
 
         // Логика связывания пользователя и канала
@@ -68,9 +59,15 @@ class TelegramChannelService
         }
 
         Log::info("Бот добавлен в канал: {$channel->title}");
+        // Возвращаем сообщение в зависимости от прав
+        if ($hasPermissions) {
+            return "Бот был добавлен на $channel->title и имеет все необходимые права!";
+        } else {
+            return "Пожалуйста, предоставьте боту следующие права на канале $channel->title: Публикация сообщений, Редактирование чужих публикаций, Удаление чужих публикаций, Публикация историй, Изменение чужих историй, Удаление чужих историй, Добавление участников.";
+        }
     }
 
-    private function downloadChannelPhoto(string $botToken, int $channelId): ?string
+    private function downloadChannelAvatar(string $botToken, int $channelId): ?string
     {
         // Получаем информацию о фото канала
         $response = Http::post("https://api.telegram.org/bot{$botToken}/getChat", [
@@ -112,4 +109,31 @@ class TelegramChannelService
             return null;
         }
     }
+
+
+    /**
+     * @param array $newChatMember
+     * @return bool
+     */
+    private function hasPermissions(array $newChatMember): bool
+    {
+        $requiredPermissions = [
+            'can_post_messages',
+            'can_edit_messages',
+            'can_delete_messages',
+            'can_post_stories',
+            'can_edit_stories',
+            'can_delete_stories',
+            'can_invite_users'
+        ];
+
+        foreach ($requiredPermissions as $permission) {
+            if (empty($newChatMember[$permission])) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }

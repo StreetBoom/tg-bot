@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('channels', function (Blueprint $table) {
+        Schema::create('static_commands', function (Blueprint $table) {
             $table->id();
-            $table->string('channel_id')->unique();
-            $table->string('title')->nullable();
-            $table->string('username');
-            $table->string('avatar')->nullable();
-            $table->boolean('has_permissions')->default(false);
+            $table->string('command')->unique();
+            $table->text('message');
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('channels');
+        Schema::dropIfExists('static_commands');
     }
 };
