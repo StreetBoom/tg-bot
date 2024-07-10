@@ -1,4 +1,4 @@
-import '../css/dashboard.css';
+import '../css/dashboard/dashboard.css';
 import Dashboard from './components/Dashboard';
 
 const userMeta = document.querySelector('meta[name="user"]');
@@ -20,7 +20,18 @@ function loadChannels() {
             channelList.innerHTML = '';
             data.forEach(channel => {
                 const li = document.createElement('li');
-                li.textContent = `${channel.channel_name} (ID: ${channel.channel_id})`;
+                const button = document.createElement('button');
+                const avatar = channel.avatar ? channel.avatar : '/images/default-avatar.webp';
+
+                button.innerHTML = `
+                    <img src="${avatar}" alt="${channel.title}" class="channel-avatar">
+                    <span>${channel.title}</span>
+                `;
+                button.classList.add('channel-button');
+                button.addEventListener('click', () => {
+                    displayChannelFunctionality(channel);
+                });
+                li.appendChild(button);
                 channelList.appendChild(li);
             });
         })
@@ -28,5 +39,23 @@ function loadChannels() {
             console.error('Ошибка загрузки каналов:', error);
         });
 }
+
+function displayChannelFunctionality(channel) {
+    const functionalityDiv = document.getElementById('channel-functionality');
+    functionalityDiv.innerHTML = `
+        <h2>Управление каналом: @${channel.username}</h2>
+        <p>Здесь будет функционал для управления каналом.</p>
+        <!-- Добавьте сюда нужные элементы для управления каналом -->
+    `;
+}
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    const backButton = document.getElementById('back-to-home');
+    if (backButton) {
+        backButton.addEventListener('click', () => {
+            window.location.href = '/';
+        });
+    }
+});
 
 loadChannels();

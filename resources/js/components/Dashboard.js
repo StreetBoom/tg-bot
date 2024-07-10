@@ -1,9 +1,10 @@
-
 export default function Dashboard(user) {
     const defaultAvatar = '/images/default-avatar.webp';
     const avatar = user.avatar ? user.avatar : defaultAvatar;
 
     return `
+        <button id="back-to-home" class="back-button">← На главную</button>
+
     <div class="dashboard">
       <aside class="sidebar">
         <div class="user-info">
@@ -11,19 +12,16 @@ export default function Dashboard(user) {
           <span class="user-name">${user.name}</span>
         </div>
         <nav class="menu">
-          <ul>
-            <li><a href="/profile">Профиль</a></li>
-            <li><a href="/settings">Настройки</a></li>
-            <li><a href="/logout">Выйти</a></li>
+          <ul id="channel-list">
+            <!-- Список каналов будет вставлен здесь -->
           </ul>
         </nav>
       </aside>
       <main class="content">
         <h1>Добро пожаловать, ${user.name}!</h1>
-        <p>Это ваша личная страница.</p>
-        <div>
-          <h2>Ваши каналы</h2>
-          <ul id="channel-list"></ul>
+        <p>Выберите канал для управления.</p>
+        <div id="channel-functionality">
+          <!-- Функционал выбранного канала будет отображаться здесь -->
         </div>
       </main>
     </div>
