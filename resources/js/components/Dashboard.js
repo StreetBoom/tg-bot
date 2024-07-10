@@ -1,5 +1,6 @@
+
 export default function Dashboard(user) {
-    const defaultAvatar = '/images/default-avatar.webp'; // Путь к заглушке
+    const defaultAvatar = '/images/default-avatar.webp';
     const avatar = user.avatar ? user.avatar : defaultAvatar;
 
     return `

@@ -15,7 +15,7 @@ class TelegramChannelService
         if(!$user) {
             return null;
         }
-        return $user->channels();
+        return $user->channels()->get();
     }
     public function addChannel(array $data, TelegraphBot $bot): string
     {

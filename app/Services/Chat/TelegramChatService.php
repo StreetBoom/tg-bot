@@ -62,7 +62,7 @@ class TelegramChatService
      * @param string $message
      * @return void
      */
-    public function senMessage(string $chatId, string $message): void
+    public function sendMessage(string $chatId, string $message): void
     {
         $this->telegraph->chat($chatId)
             ->message($message)

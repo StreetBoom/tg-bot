@@ -3,6 +3,7 @@
 namespace App\Telegram;
 
 use AllowDynamicProperties;
+use App\Models\StaticCommand;
 use App\Services\Channel\TelegramChannelService;
 use App\Services\Chat\TelegramChatService;
 use App\Services\User\TelegramUserService;
@@ -54,6 +55,7 @@ use Illuminate\Support\Stringable;
     }
 
 
+
     /**
      * @param Request $request
      * @param TelegraphBot $bot
@@ -62,8 +64,15 @@ use Illuminate\Support\Stringable;
     public function handle(Request $request, TelegraphBot $bot): void
     {
         $data = $request->all();
+        $command = StaticCommand::where('command',$data['message']['text'])->first();
+Log::info(json_encode(trim($data['message']['text'])));
+        if (isset($command)){
+            $staticCommand = StaticCommand::where('command', $data['message']['text'])->first();
 
-        if (isset($data['my_chat_member']) && $data['my_chat_member']['chat']['type'] === 'channel') {
+                // Отправляем сообщение, если команда найдена
+                $this->telegramChatService->sendMessage($data['message']['chat']['id'], $staticCommand->message);
+
+        } elseif (isset($data['my_chat_member']) && $data['my_chat_member']['chat']['type'] === 'channel') {
             $this->handleChannelMember($data, $bot);
         } else {
             parent::handle($request, $bot);
@@ -83,7 +92,7 @@ use Illuminate\Support\Stringable;
         if (isset($data['my_chat_member']['new_chat_member']['status']) && $data['my_chat_member']['new_chat_member']['status'] === 'administrator') {
                $message = $this->telegramChannelService->addChannel($data, $bot);
 
-                $this->telegramChatService->senMessage($chatUserId, $message);
+                $this->telegramChatService->sendMessage($chatUserId, $message);
 
         }
         //При удаление бота с канала
@@ -93,7 +102,7 @@ use Illuminate\Support\Stringable;
             $channelName = $data['my_chat_member']['chat']['title'];
             $chatUserId = $this->telegramChatService->getChatIdByChannelId($data['my_chat_member']['chat']['id']);
             if ($chatUserId) {
-                $this->telegramChatService->senMessage($chatUserId, 'Бот был удален с канала!');
+                $this->telegramChatService->sendMessage($chatUserId, 'Бот был удален с канала!');
             } else {
                 Log::warning("Не удалось найти chat_id");
             }
