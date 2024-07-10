@@ -11,6 +11,7 @@ use DefStudio\Telegraph\Telegraph;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class TelegramAuthService
 {
@@ -55,7 +56,7 @@ class TelegramAuthService
 
         // Если пользователь не существует или у него нет аватара, скачиваем аватар
         if (!$user || !$user->avatar) {
-            $avatar = isset($data['photo']) ? $this->getUserProfilePhotoUrl($bot->token, $data['photo']) : null;
+            $avatar = isset($data['photo']) ? $this->downloadUserAvatar($bot->token, $data['photo'], $data['id']) : null;
         }
 
         // Создаем DTO из данных
@@ -97,16 +98,18 @@ class TelegramAuthService
         return true;
     }
 
+
     /**
      * Метод скачивает фото пользователя и сохраняет его
      *
      * @param string $botToken
      * @param array $photo
+     * @param int $userId
      * @return string|null
      */
-    private function getUserProfilePhotoUrl(string $botToken, array $photo): ?string
+    private function downloadUserAvatar(string $botToken, array $photo, int $userId): ?string
     {
-        $fileId = $photo['big_file_id']; // Используем big_file_id для лучшего качества
+        $fileId = $photo['small_file_id']; // Используем small_file_id для низкого качества
 
         // Получаем информацию о файле
         $response = Http::get("https://api.telegram.org/bot{$botToken}/getFile", [
@@ -119,9 +122,27 @@ class TelegramAuthService
             $filePath = $fileInfo['result']['file_path'];
             $fileUrl = "https://api.telegram.org/file/bot{$botToken}/{$filePath}";
 
-            Log::info("Получен URL аватара: {$fileUrl}");
+            Log::info("URL файла для скачивания: {$fileUrl}");
 
-            return $fileUrl;
+            // Скачиваем файл
+            $fileContent = Http::get($fileUrl)->body();
+
+            // Генерируем имя файла и сохраняем его в директорию public
+            $fileName = "images/userAvatars/{$userId}.jpg";
+            $publicPath = public_path($fileName);
+
+            // Проверяем директорию
+            $directory = public_path('images/userAvatars');
+            if (!file_exists($directory)) {
+                mkdir($directory, 0777, true);
+            }
+
+            // Сохраняем файл
+            file_put_contents($publicPath, $fileContent);
+
+            Log::info("Файл успешно сохранен: {$publicPath}");
+
+            return "/images/userAvatars/{$userId}.jpg";
         } else {
             Log::error("Ошибка при получении информации о файле: " . $fileInfo['description']);
             return null;
