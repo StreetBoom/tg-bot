@@ -58,18 +58,27 @@ return [
     | Supported: "database", "eloquent"
     |
     */
-
+        // Для орчид авторизация по юзерам.
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'model' => App\Models\User::class,
         ],
+        // Настройка для TelegramUser для других частей приложения
+        'telegram_users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\TelegramUser::class,
+        ],
+    ],
 
+    'auth' => [
+        'guard' => 'web'
+    ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
-    ],
+
 
     /*
     |--------------------------------------------------------------------------

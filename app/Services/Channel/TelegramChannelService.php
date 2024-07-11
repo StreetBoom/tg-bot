@@ -3,6 +3,7 @@
 namespace App\Services\Channel;
 
 use App\Models\Channel;
+use App\Models\TelegramUser;
 use App\Models\User;
 use DefStudio\Telegraph\Models\TelegraphBot;
 use Illuminate\Support\Facades\Http;
@@ -51,7 +52,7 @@ class TelegramChannelService
 
         // Логика связывания пользователя и канала
         $userId = $data['my_chat_member']['from']['id'];
-        $user = User::where('telegram_id', $userId)->first();
+        $user = TelegramUser::where('telegram_id', $userId)->first();
 
         //Если пользователь существует, то связывает пользователя и канал
         if ($user) {

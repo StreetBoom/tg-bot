@@ -3,6 +3,7 @@
 namespace App\Services\User;
 
 use App\DTO\User\TelegramUserDTO;
+use App\Models\TelegramUser;
 use App\Models\User;
 use App\Services\Chat\TelegramChatService;
 use DefStudio\Telegraph\Models\TelegraphBot;
@@ -49,7 +50,7 @@ class TelegramAuthService
         }
 
         // Проверяем, существует ли пользователь в базе данных
-        $user = User::where('telegram_id', $data['id'])->first();
+        $user = TelegramUser::where('telegram_id', $data['id'])->first();
         $isNewUser = false;
         $avatar = null;
 
@@ -71,7 +72,7 @@ class TelegramAuthService
         }
 
         // Логика авторизации
-        $user = User::updateOrCreate(
+        $user = TelegramUser::updateOrCreate(
             ['telegram_id' => $telegramUserDTO->telegram_id],
             [
                 'username' => $telegramUserDTO->username,

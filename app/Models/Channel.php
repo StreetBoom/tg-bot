@@ -14,6 +14,6 @@ class Channel extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'user_channels')->withTimestamps();
+        return $this->belongsToMany(TelegramUser::class, 'user_channels')->withTimestamps();
     }
 }
