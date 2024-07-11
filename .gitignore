@@ -4,6 +4,7 @@
 /public/hot
 /public/storage
 /public/images/userAvatars
+/public/images/channelAvatars
 /docker/mysql
 /docker/nginx/logs
 /docker/socket
@@ -21,7 +22,6 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-/docker/*
 /docker/mysql/*
 /docker/nginx/logs/*
 /docker/socket/*

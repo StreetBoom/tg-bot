@@ -16,7 +16,7 @@ services:
 
     app:
         build:
-            context: docker/app/dev
+            context: docker/app/local
             dockerfile: Dockerfile
         volumes:
             - ./:/var/www/html
@@ -30,13 +30,14 @@ services:
             - db
 
     db:
-        image: mysql:latest
+        image: postgres:latest
         restart: always
-        container_name: tg_bot_mysql
+        container_name: tg_bot_postgres
         environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: tg_bot
+            POSTGRES_PASSWORD: root
+            POSTGRES_DB: tg_bot
+            POSTGRES_USER: root
         ports:
-            - "3306:3306"
+            - "5432:5432"
         volumes:
-            - ./docker/mysql/data:/var/lib/mysql
+            - ./docker/postgres/data:/var/lib/postgresql/data
