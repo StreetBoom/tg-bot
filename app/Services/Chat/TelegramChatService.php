@@ -65,8 +65,13 @@ class TelegramChatService
      */
     public function sendMessage(string $chatId, string $message): void
     {
-        $this->telegraph->chat($chatId)
-            ->message($message)
-            ->send();
+        try {
+            $response = $this->telegraph->chat($chatId)
+                ->message($message)
+                ->send();
+
+        } catch (\Exception $e) {
+            Log::error("Failed to send message: " . $e->getMessage());
+        }
     }
 }
