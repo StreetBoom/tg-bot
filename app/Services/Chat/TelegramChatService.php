@@ -55,22 +55,40 @@ class TelegramChatService
         return null;
     }
 
+
     /**
-     * Отправляет сообщение пользователю в чат
-     *
      * @param string $chatId
      * @param string $message
+     * @param string|null $image
+     * @param array|null $dataInline
      * @return void
      */
-    public function sendMessage(string $chatId, string $message): void
+    public function sendMessage(string $chatId, string $message, ?string $image = null, ?array $dataInline = null): void
     {
         try {
-            $response = $this->telegraph->chat($chatId)
-                ->message($message)
-                ->send();
+            Log::info("Attempting to send message to chat_id: $chatId with message: $message");
 
+            $telegraph = $this->telegraph->chat($chatId)->message($message);
+
+            //Добавляем фото
+            if (isset($image)) {
+                Log::info("Adding photo: $image");
+                $telegraph->photo(public_path($image), 'file');
+            }
+            //Добавляем кнопки
+            if (isset($dataInline)) {
+                Log::info("Adding inline buttons");
+                $telegraph->withData('reply_markup', json_encode([
+                    'inline_keyboard' => $dataInline,
+                ]));
+            }
+
+            $response = $telegraph->send();
+
+            Log::info("Message sent successfully: " . json_encode($response));
         } catch (\Exception $e) {
             Log::error("Failed to send message: " . $e->getMessage());
         }
     }
+
 }
