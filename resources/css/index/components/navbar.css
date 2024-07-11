@@ -28,13 +28,10 @@
 .navbar .nav-links a,
 .navbar .nav-links button {
     text-decoration: none;
-    color: #ccc;
-    font-size: 1rem;
     transition: color 0.3s, transform 0.3s;
     height: 100%; /* Занимает всю высоту навбара */
     display: flex;
     align-items: center;
-    background: none;
     border: none;
     cursor: pointer;
     font: inherit; /* Наследует шрифтовые стили */
