@@ -56,7 +56,6 @@ class TelegramChatService
         return null;
     }
 
-
     /**
      * @param string $chatId
      * @param string $message
@@ -71,15 +70,22 @@ class TelegramChatService
 
             $telegraph = $this->telegraph->chat($chatId)->message($message);
 
-            //Добавляем фото
-            if (isset($image)) {
-                Log::info("Adding photo: $image");
-                $telegraph->photo(public_path($image), 'file');
+            // Добавляем фото
+            if ($image) {
+                $imagePath = public_path($image);
+                Log::info('Image path: ' . $imagePath . ' Exists: ' . (file_exists($imagePath) ? 'Yes' : 'No'));
+                if (file_exists($imagePath)) {
+                    Log::info("Adding photo: $imagePath");
+                    $telegraph = $telegraph->photo($imagePath, 'file');
+                } else {
+                    Log::warning("Image not found: $imagePath");
+                }
             }
-            //Добавляем кнопки
-            if (isset($dataInline)) {
+
+            // Добавляем кнопки
+            if ($dataInline) {
                 Log::info("Adding inline buttons");
-                $telegraph->withData('reply_markup', json_encode([
+                $telegraph = $telegraph->withData('reply_markup', json_encode([
                     'inline_keyboard' => $dataInline,
                 ]));
             }

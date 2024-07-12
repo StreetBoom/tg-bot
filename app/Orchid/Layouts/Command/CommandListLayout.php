@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Orchid\Layouts\Command;
 
 use App\Models\Command;
+use App\Models\StaticCommand;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
@@ -28,7 +29,7 @@ class CommandListLayout extends Table
             TD::make('command.id', 'ID')
                 ->sort()
                 ->cantHide()
-                ->render(function (Command $command) {
+                ->render(function (StaticCommand $command) {
                     return Link::make((string)$command->id)
                         ->route('platform.commands.edit', $command->id);
                 }),
@@ -37,23 +38,38 @@ class CommandListLayout extends Table
                 ->sort()
                 ->cantHide()
                 ->filter(Input::make())
-                ->render(function (Command $command) {
+                ->render(function (StaticCommand $command) {
                     return Link::make((string)$command->name)
                         ->route('platform.commands.edit', $command->id);
                 }),
 
-            TD::make('command.response', __('Ответ'))
+            TD::make('command.image', __('Изображение'))
+                ->cantHide()
+                ->render(function (StaticCommand $command) {
+                    return Link::make((string)$command->image)
+                        ->route('platform.commands.edit', $command->id);
+                }),
+
+            TD::make('command.response', __('Название команды'))
                 ->sort()
                 ->cantHide()
-                ->render(function (Command $command) {
+                ->render(function (StaticCommand $command) {
                     return Link::make((string)$command->response)
+                        ->route('platform.commands.edit', $command->id);
+                }),
+
+            TD::make('command.massage', __('Ответ'))
+                ->sort()
+                ->cantHide()
+                ->render(function (StaticCommand $command) {
+                    return Link::make((string)$command->message)
                         ->route('platform.commands.edit', $command->id);
                 }),
 
             TD::make('command.status', __('Статус'))
                 ->sort()
                 ->cantHide()
-                ->render(function (Command $command) {
+                ->render(function (StaticCommand $command) {
                     $statusText = $command->status ? 'Активна' : 'Неактивна';
                     return Link::make($statusText)
                         ->route('platform.commands.edit', $command->id);
@@ -62,7 +78,7 @@ class CommandListLayout extends Table
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
                 ->width('100px')
-                ->render(fn (Command $command) => DropDown::make()
+                ->render(fn (StaticCommand $command) => DropDown::make()
                     ->icon('bs.three-dots-vertical')
                     ->list([
 

@@ -5,6 +5,7 @@
 /public/storage
 /public/images/userAvatars
 /public/images/channelAvatars
+/public/images/commands
 /docker/mysql
 /docker/nginx/logs
 /docker/socket

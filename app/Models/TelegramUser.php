@@ -10,11 +10,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\Authenticatable as AuthenticateTrait;
+use Orchid\Screen\AsSource;
 
 
 class TelegramUser extends Model implements Authenticatable
 {
-    use HasFactory, Notifiable, AuthenticateTrait;
+    use HasFactory, Notifiable, AuthenticateTrait, AsSource;
 
     /**
      * The attributes that are mass assignable.

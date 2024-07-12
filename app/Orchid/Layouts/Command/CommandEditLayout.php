@@ -21,16 +21,28 @@ class CommandEditLayout extends Rows
     {
         return [
             Input::make('command.name')
-                ->title('Имя команды')
+                ->title('Команда')
                 ->placeholder('Введите имя команды')
                 ->required(),
 
-            TextArea::make('command.response')
+            TextArea::make('command.message')
                 ->title('Ответ')
-                ->placeholder('Введите ответ команды')
+                ->placeholder('Введите сообщение команды')
                 ->rows(3)
                 ->maxlength(500)
                 ->required(),
+
+            TextArea::make('command.response')
+                ->title('Название команды')
+                ->placeholder('Введите название команды, название будет выводиться в меню. (Оставьте пустым если не хотите чтобы команды выводилась в меню)')
+                ->rows(3)
+                ->maxlength(500),
+
+            Input::make('command.image')
+                ->type('file')
+                ->title('Изображение')
+                ->acceptedFiles('image/*')
+                ->help('Загрузите изображение для команды'),
 
             CheckBox::make('command.status')
                 ->title('Статус')

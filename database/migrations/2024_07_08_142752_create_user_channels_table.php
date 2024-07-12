@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_channels', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('telegram_users')->onDelete('cascade');
             $table->foreignId('channel_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

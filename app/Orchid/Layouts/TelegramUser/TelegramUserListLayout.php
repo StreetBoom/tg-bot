@@ -25,40 +25,15 @@ class TelegramUserListLayout extends Table
     public function columns(): array
     {
         return [
-//            TD::make('user.id', 'ID')
-//                ->sort()
-//                ->cantHide()
-//                ->render(function (TelegramUser $user) {
-//                    return Link::make((string)$user->id);
-////                        ->route('platform.tg-users.edit', $user->id);
-//                }),
 
             TD::make('user.name', __('Имя'))
                 ->sort()
                 ->cantHide()
                 ->filter(Input::make())
                 ->render(function (TelegramUser $user) {
-                    return Link::make((string)$user->name);
-//                        ->route('platform.tg-users.edit', $user->id);
+                    return Link::make((string)$user->name)
+                        ->route('platform.tg-users.detail', $user->id);
                 }),
-
-//            TD::make('user.email', __('Email'))
-//                ->sort()
-//                ->cantHide()
-//                ->filter(Input::make())
-//                ->render(function (TelegramUser $user) {
-//                    return Link::make((string)$user->email);
-////                        ->route('platform.tg-users.edit', $user->id);
-//                }),
-
-//            TD::make('user.email_verified_at', __('Подтверждение почты'))
-//                ->sort()
-//                ->cantHide()
-//                ->render(function (TelegramUser $user) {
-//                    $statusText = $user->email_verified_at ? 'Подтвержден' : 'Не подтвержден';
-////                    return Link::make($statusText)
-////                        ->route('platform.tg-users.edit', $user->id);
-//                }),
 
             TD::make('user.telegram_id', __('Telegram ID'))
                 ->sort()

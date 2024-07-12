@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Orchid\Screens\Command;
 
 use App\Models\Command;
+use App\Models\StaticCommand;
 use App\Orchid\Layouts\Command\CommandEditLayout;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -78,30 +79,60 @@ class CommandEditScreen extends Screen
     }
 
     /**
+     * Create a new command.
+     *
      * @param Request $request
-     * @return RedirectResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function create(Request $request)
     {
-        $commandData = $request->command;
-        Command::create($commandData);
-        Toast::info('Команда была создан');
-        return redirect()->route('platform.commands');
-    }
-
-
-    /**
-     * @return RedirectResponse
-     */
-    public function save(Request $request, Command $command)
-    {
-        $request->validate([
+        $data = $request->validate([
             'command.name' => 'required',
-            'command.response' => 'required',
+            'command.message' => 'required',
+            'command.response' => 'nullable',
             'command.status' => 'required',
         ]);
 
-        $command->fill($request->get('command'));
+        if ($request->hasFile('command.image')) {
+            $file = $request->file('command.image');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension(); // Генерация уникального имени файла
+            $path = 'images/commands/' . $filename;
+            $file->move(public_path('images/commands'), $filename);
+            $data['command']['image'] = $path;
+        }
+
+        StaticCommand::create($data['command']);
+
+        Toast::info('Команда была создана');
+
+        return redirect()->route('platform.commands');
+    }
+
+    /**
+     * Save the command.
+     *
+     * @param Request $request
+     * @param StaticCommand $command
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function save(Request $request, StaticCommand $command)
+    {
+        $data = $request->validate([
+            'command.name' => 'required',
+            'command.message' => 'required',
+            'command.response' => 'nullable',
+            'command.status' => 'required',
+        ]);
+
+        if ($request->hasFile('command.image')) {
+            $file = $request->file('command.image');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension(); // Генерация уникального имени файла
+            $path = 'images/commands/' . $filename;
+            $file->move(public_path('images/commands'), $filename);
+            $data['command']['image'] = $path;
+        }
+
+        $command->fill($data['command']);
         $command->save();
 
         Toast::info(__('Команда была сохранена'));
@@ -114,7 +145,7 @@ class CommandEditScreen extends Screen
      *
      * @return RedirectResponse
      */
-    public function remove(Command $command)
+    public function remove(StaticCommand $command)
     {
         try {
             $command->delete();

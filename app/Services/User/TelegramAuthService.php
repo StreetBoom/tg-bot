@@ -89,7 +89,7 @@ class TelegramAuthService
                 $user->save();
             }
 
-            Auth::login($user);
+            Auth::guard('telegram')->login($user);
 
             // Отправляем сообщение пользователю об успешной регистрации, если это новый пользователь
             if ($isNewUser) {

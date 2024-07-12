@@ -29,8 +29,8 @@ class AddTelegraphBotsTable extends Command
         // Проверка на существование записей
         if (TelegraphBot::count() == 0) {
             TelegraphBot::create([
-                'token' => '6849458050:AAGHqFX7INpudojFXJRAwqk3yCaHeh5lFxY',
-                //7437300242:AAHdjU8VqdhPivMFf2j0G4734V2Vt9ydUDg  Egor
+                'token' => '7437300242:AAHdjU8VqdhPivMFf2j0G4734V2Vt9ydUDg',
+                //6938499795:AAHrh9TwdSyLsLHGS7Lj2uQjFZYvePDAveI Egor
                 //6849458050:AAGHqFX7INpudojFXJRAwqk3yCaHeh5lFxY  Slava
                 'name' => 'SvvkrusTestBot',
             ]);

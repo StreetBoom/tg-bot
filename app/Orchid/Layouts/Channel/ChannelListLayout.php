@@ -6,6 +6,7 @@ namespace App\Orchid\Layouts\Channel;
 
 use App\Models\Channel;
 use App\Models\TelegramUser;
+use Illuminate\Support\Facades\Log;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
@@ -40,8 +41,8 @@ class ChannelListLayout extends Table
                 ->cantHide()
                 ->filter(Input::make())
                 ->render(function (Channel $channel) {
-                    return Link::make((string)$channel->title);
-//                        ->route('platform.tg-users.edit', $user->id);
+                    return Link::make((string)$channel->title)
+                        ->route('platform.channels.detail', $channel->id);
                 }),
 
             TD::make('channel.username', __('Username'))
@@ -55,16 +56,18 @@ class ChannelListLayout extends Table
 
             TD::make('users', __('Пользователи'))
                 ->render(function (Channel $channel) {
-                    return $channel->users->pluck('username')->join(', ');
+                    return $channel->users->map(function ($user) {
+                        return '<a href="' . route('platform.tg-users.detail', $user->id) . '">' . e($user->name) . '</a>';
+                    })->implode(', ');
                 }),
 
-            TD::make('channel.has_permission', __('Наличие прав'))
+            TD::make('channel.has_permission', __('Наличие прав у бота'))
                 ->sort()
                 ->cantHide()
                 ->render(function (Channel $channel) {
-                    $statusText = $channel->has_permission ? 'Имеются' : 'Не имеются';
-//                    return Link::make($statusText)
-//                        ->route('platform.tg-users.edit', $user->id);
+                    $statusText = $channel->has_permissions ? 'Имеются' : 'Не имеются';
+                    return Link::make($statusText);
+
                 }),
 
             TD::make(__('Actions'))

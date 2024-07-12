@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Orchid\Screen\AsSource;
+
 
 class Channel extends Model
 {
-    use HasFactory;
+    use HasFactory, AsSource;
 
     protected $guarded = [];
 
@@ -16,5 +18,9 @@ class Channel extends Model
     {
         return $this->belongsToMany(TelegramUser::class, 'user_channels', 'channel_id', 'user_id')->withTimestamps();
     }
+
+    protected $casts = [
+        'has_permission' => 'boolean',
+    ];
 
 }

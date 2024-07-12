@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Orchid\Screens\Command;
 
 use App\Models\Command;
+use App\Models\StaticCommand;
 use App\Orchid\Layouts\Command\CommandListLayout;
 
 
@@ -24,7 +25,7 @@ class CommandListScreen extends Screen
     public function query(): iterable
     {
         return [
-            'commands' => Command::paginate(),
+            'commands' => StaticCommand::paginate(),
         ];
     }
 

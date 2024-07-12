@@ -139,9 +139,9 @@ class Handler extends WebhookHandler
         if ($this->message->text() === '/start') {
             $this->start();
         } else {
-            $command = StaticCommand::where('command', $this->message->text())->first();
+            $command = StaticCommand::where('name', $this->message->text())->first();
             if ($command) {
-                $this->telegramChatService->sendMessage($this->chat->chat_id, $command->message);
+                $this->telegramChatService->sendMessage($this->chat->chat_id, $command->message, $command->image);
             } else {
                 $this->handleUnknownCommand($this->message->text());
             }

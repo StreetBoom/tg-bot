@@ -34,7 +34,7 @@ class RegisterTelegramCommands extends Command
             return;
         }
 
-        $commands = StaticCommand::all()->pluck('message', 'command')->toArray();
+        $commands = StaticCommand::all()->pluck('message', 'name')->toArray();
 
         $bot->registerCommands($commands)->send();
 
