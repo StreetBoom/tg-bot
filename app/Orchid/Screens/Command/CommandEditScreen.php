@@ -6,6 +6,7 @@ namespace App\Orchid\Screens\Command;
 
 use App\Models\Command;
 use App\Orchid\Layouts\Command\CommandEditLayout;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
@@ -36,15 +37,7 @@ class CommandEditScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Управление командами';
-    }
-
-    /**
-     * Display header description.
-     */
-    public function description(): ?string
-    {
-        return '';
+        return $this->command->exists ? 'Изменение комманд' : 'Создание комманд';
     }
 
     /**
@@ -54,16 +47,22 @@ class CommandEditScreen extends Screen
      */
     public function commandBar(): iterable
     {
-        return [
-            Button::make(__('Save'))
-                ->icon('bs.check-circle')
-                ->method('save'),
+        return $this->command->exists ? [
+            Button::make('Удалить')
+                ->icon('trash')
+                ->confirm('Вы точно хотите удалить эту комманду?')
+                ->method('remove'),
 
-            Button::make(__('Remove'))
-                ->icon('bs.trash3')
-                ->method('remove')
-                ->canSee($this->command->exists),
-        ];
+            Button::make('Сохранить')
+                ->icon('check')
+                ->method('save'),
+        ] :
+            [
+                Button::make('Создать')
+                    ->icon('check')
+                    ->method('create'),
+            ];
+
     }
 
     /**
@@ -79,19 +78,33 @@ class CommandEditScreen extends Screen
     }
 
     /**
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function create(Request $request)
+    {
+        $commandData = $request->command;
+        Command::create($commandData);
+        Toast::info('Команда была создан');
+        return redirect()->route('platform.commands');
+    }
+
+
+    /**
+     * @return RedirectResponse
      */
     public function save(Request $request, Command $command)
     {
         $request->validate([
             'command.name' => 'required',
             'command.response' => 'required',
+            'command.status' => 'required',
         ]);
 
         $command->fill($request->get('command'));
         $command->save();
 
-        Toast::info(__('Command was saved'));
+        Toast::info(__('Команда была сохранена'));
 
         return redirect()->route('platform.commands');
     }
@@ -99,18 +112,13 @@ class CommandEditScreen extends Screen
     /**
      * @throws \Exception
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function remove(Command $command)
     {
-        if (!$command->exists) {
-            Toast::error(__('Command does not exist.'));
-            return redirect()->route('platform.commands');
-        }
-
         try {
             $command->delete();
-            Toast::info(__('Command was removed'));
+            Toast::info(__('Команда была удалена'));
         } catch (\Exception $e) {
             Toast::error(__('Failed to remove command.'));
         }

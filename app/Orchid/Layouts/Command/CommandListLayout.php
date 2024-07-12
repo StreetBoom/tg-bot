@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Orchid\Layouts\Command;
 
 use App\Models\Command;
+use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Layouts\Table;
@@ -15,7 +17,7 @@ class CommandListLayout extends Table
     /**
      * @var string
      */
-    public $target = 'command';
+    public $target = 'commands';
 
     /**
      * @return TD[]
@@ -23,27 +25,59 @@ class CommandListLayout extends Table
     public function columns(): array
     {
         return [
-            TD::make('name', __('Name'))
+            TD::make('command.id', 'ID')
+                ->sort()
+                ->cantHide()
+                ->render(function (Command $command) {
+                    return Link::make((string)$command->id)
+                        ->route('platform.commands.edit', $command->id);
+                }),
+
+            TD::make('command.name', __('Имя'))
                 ->sort()
                 ->cantHide()
                 ->filter(Input::make())
-                ->render(fn (Command $command) => Link::make($command->name)
-                    ->route('platform.commands', $command->id)),
+                ->render(function (Command $command) {
+                    return Link::make((string)$command->name)
+                        ->route('platform.commands.edit', $command->id);
+                }),
 
-            TD::make('response', __('Response'))
+            TD::make('command.response', __('Ответ'))
                 ->sort()
-                ->cantHide(),
+                ->cantHide()
+                ->render(function (Command $command) {
+                    return Link::make((string)$command->response)
+                        ->route('platform.commands.edit', $command->id);
+                }),
 
-//            TD::make('created_at', __('Created'))
-//                ->usingComponent(DateTimeSplit::class)
-//                ->align(TD::ALIGN_RIGHT)
-//                ->defaultHidden()
-//                ->sort(),
-//
-//            TD::make('updated_at', __('Last edit'))
-//                ->usingComponent(DateTimeSplit::class)
-//                ->align(TD::ALIGN_RIGHT)
-//                ->sort(),
+            TD::make('command.status', __('Статус'))
+                ->sort()
+                ->cantHide()
+                ->render(function (Command $command) {
+                    $statusText = $command->status ? 'Активна' : 'Неактивна';
+                    return Link::make($statusText)
+                        ->route('platform.commands.edit', $command->id);
+                }),
+
+            TD::make(__('Actions'))
+                ->align(TD::ALIGN_CENTER)
+                ->width('100px')
+                ->render(fn (Command $command) => DropDown::make()
+                    ->icon('bs.three-dots-vertical')
+                    ->list([
+
+                        Link::make(__('Редактировать'))
+                            ->route('platform.commands.edit', $command->id)
+                            ->icon('bs.pencil'),
+
+                        Button::make(__('Удалить'))
+                            ->icon('bs.trash3')
+                            ->confirm(__('Вы уверены, что хотите удалить команду безвозвратно?'))
+                            ->method('remove', [
+                                'id' => $command->id,
+                            ]),
+                    ])),
+
         ];
     }
 }

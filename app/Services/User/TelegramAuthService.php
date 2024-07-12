@@ -3,6 +3,7 @@
 namespace App\Services\User;
 
 use App\DTO\User\TelegramUserDTO;
+use App\Models\TelegramUser;
 use App\Models\User;
 use App\Services\Chat\TelegramChatService;
 use DefStudio\Telegraph\Models\TelegraphBot;

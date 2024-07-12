@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Orchid\Screens\Channel\ChannelListScreen;
+use App\Orchid\Screens\Channel\UserCardScreen;
 use App\Orchid\Screens\Command\CommandEditScreen;
 use App\Orchid\Screens\Command\CommandListScreen;
 use App\Orchid\Screens\Examples\ExampleActionsScreen;
@@ -16,6 +18,8 @@ use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
+use App\Orchid\Screens\TelegramUser\TelegramUserEditScreen;
+use App\Orchid\Screens\TelegramUser\TelegramUserListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
@@ -34,22 +38,67 @@ use Tabuna\Breadcrumbs\Trail;
 */
 
 // Command list
-Route::screen('command', CommandListScreen::class)
+Route::screen('commands', CommandListScreen::class)
     ->name('platform.commands')
-    ->breadcrumbs(fn (Trail $trail) => $trail
-        ->parent('platform.index')
-        ->push(__('Commands'), route('platform.commands')));
-
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.index')
+            ->push('Общие комманды', route('platform.commands'));
+    });
 // Command edit
+Route::screen('commands/{command}/edit', CommandEditScreen::class)
+    ->name('platform.commands.edit')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.commands')
+            ->push('Редактирование команды', route('platform.commands'));
+    });
+// Command create
 Route::screen('commands/create', CommandEditScreen::class)
     ->name('platform.commands.create')
-    ->breadcrumbs(fn (Trail $trail) => $trail
-        ->parent('platform.commands')
-        ->push(__('Create'), route('platform.commands.create')));
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.commands')
+            ->push('Создание команды', route('platform.commands'));
+    });
+
+// Tg users list
+Route::screen('tg-users', TelegramUserListScreen::class)
+    ->name('platform.tg-users')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.index')
+            ->push('Пользователи телеграм', route('platform.tg-users'));
+    });
+//// Tg users edit
+//Route::screen('tg-users/{user}/edit', TelegramUserEditScreen::class)
+//    ->name('platform.tg-users.edit')
+//    ->breadcrumbs(function (Trail $trail) {
+//        return $trail
+//            ->parent('platform.tg-users')
+//            ->push('Редактирование пользователей', route('platform.tg-users'));
+//    });
+//// Tg users create
+//Route::screen('tg-users/create', TelegramUserEditScreen::class)
+//    ->name('platform.tg-users.create')
+//    ->breadcrumbs(function (Trail $trail) {
+//        return $trail
+//            ->parent('platform.tg-users')
+//            ->push('Создание пользователя', route('platform.tg-users'));
+//    });
+
+// Channels
+Route::screen('channels', ChannelListScreen::class)
+    ->name('platform.channels')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.index')
+            ->push('Каналы', route('platform.channels'));
+    });
 
 // Main
-Route::screen('/main', PlatformScreen::class)
-    ->name('platform.main');
+        Route::screen('/main', PlatformScreen::class)
+            ->name('platform.main');
 
 // Platform > Profile
 Route::screen('profile', UserProfileScreen::class)

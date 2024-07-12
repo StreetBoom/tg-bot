@@ -10,7 +10,7 @@ use DefStudio\Telegraph\Telegraph;
 
 
 Route::get('/', function () {
-    $user = Auth::user();
+    $user = Auth::guard('telegram')->user();
     $bot = TelegraphBot::first();
     $botName = $bot->name;
 
@@ -21,7 +21,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/dashboard', function () {
-    $user = Auth::user();
+    $user = Auth::guard('telegram')->user();
     return view('dashboard', [
         'user' => $user ? array_merge($user->only(['name', 'avatar']), ['isAuthenticated' => true]) : ['isAuthenticated' => false]
     ]);

@@ -50,7 +50,7 @@ class TelegramUser extends Model implements Authenticatable
 
     public function channels(): BelongsToMany
     {
-        return $this->belongsToMany(Channel::class, 'user_channels')->withTimestamps();
+        return $this->belongsToMany(Channel::class, 'user_channels', 'user_id', 'channel_id')->withTimestamps();
     }
     public function telegraphChat(): BelongsTo
     {

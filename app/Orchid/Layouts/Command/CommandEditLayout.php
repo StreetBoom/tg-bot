@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Orchid\Layouts\Command;
 
 use Orchid\Screen\Field;
+use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Layouts\Rows;
@@ -21,15 +22,19 @@ class CommandEditLayout extends Rows
         return [
             Input::make('command.name')
                 ->title('Имя команды')
-                ->placeholder('Enter the command name')
+                ->placeholder('Введите имя команды')
                 ->required(),
 
             TextArea::make('command.response')
                 ->title('Ответ')
-                ->placeholder('Enter the response for the command')
+                ->placeholder('Введите ответ команды')
                 ->rows(3)
                 ->maxlength(500)
                 ->required(),
+
+            CheckBox::make('command.status')
+                ->title('Статус')
+                ->sendTrueOrFalse(),
         ];
     }
 }

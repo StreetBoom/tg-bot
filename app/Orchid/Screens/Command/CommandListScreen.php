@@ -6,9 +6,13 @@ namespace App\Orchid\Screens\Command;
 
 use App\Models\Command;
 use App\Orchid\Layouts\Command\CommandListLayout;
+
+
+use Illuminate\Http\Request;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
+use Orchid\Support\Facades\Toast;
 
 class CommandListScreen extends Screen
 {
@@ -33,14 +37,6 @@ class CommandListScreen extends Screen
     }
 
     /**
-     * Display header description.
-     */
-    public function description(): ?string
-    {
-        return 'Список команд для бота телеграм';
-    }
-
-    /**
      * The screen's action buttons.
      *
      * @return Action[]
@@ -48,7 +44,7 @@ class CommandListScreen extends Screen
     public function commandBar(): iterable
     {
         return [
-            Link::make(__('Add'))
+            Link::make(__('Добавить'))
                 ->icon('bs.plus-circle')
                 ->href(route('platform.commands.create')),
         ];
@@ -64,5 +60,12 @@ class CommandListScreen extends Screen
         return [
             CommandListLayout::class,
         ];
+    }
+
+    public function remove(Request $request): void
+    {
+        Command::findOrFail($request->get('id'))->delete();
+
+        Toast::info(__('Команда удалена'));
     }
 }
