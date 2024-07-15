@@ -40,7 +40,7 @@ class TelegramUserListLayout extends Table
                 ->cantHide()
                 ->filter(Input::make())
                 ->render(function (TelegramUser $user) {
-                    return Link::make((string)$user->telegram_id);
+                    return (string)$user->telegram_id;
 //                        ->route('platform.tg-users.edit', $user->id);
                 }),
 
@@ -49,14 +49,18 @@ class TelegramUserListLayout extends Table
                 ->cantHide()
                 ->filter(Input::make())
                 ->render(function (TelegramUser $user) {
-                    return Link::make((string)$user->username);
-//                        ->route('platform.tg-users.edit', $user->id);
+                    return (string)$user->username;
                 }),
+//                        ->route('platform.tg-users.edit', $user->id);
+
 
             TD::make('channels', __('Каналы'))
                 ->render(function (TelegramUser $user) {
-                    return $user->channels->pluck('username')->join(', ');
+                    return $user->channels->map(function ($user) {
+                        return '<a href="' . route('platform.channels.detail', $user->id) . '">' . e($user->title) . '</a>';
+                    })->implode(', ');
                 }),
+
 
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)

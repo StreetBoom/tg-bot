@@ -65,7 +65,14 @@ class CommandListScreen extends Screen
 
     public function remove(Request $request): void
     {
-        Command::findOrFail($request->get('id'))->delete();
+        $command = StaticCommand::findOrFail($request->get('id'));
+
+        // Удаление изображения, если оно существует
+        if ($command->image && file_exists(public_path($command->image))) {
+            unlink(public_path($command->image));
+        }
+
+        $command->delete();
 
         Toast::info(__('Команда удалена'));
     }

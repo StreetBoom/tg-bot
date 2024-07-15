@@ -34,12 +34,12 @@ class CommandListLayout extends Table
                         ->route('platform.commands.edit', $command->id);
                 }),
 
-            TD::make('command.name', __('Имя'))
+            TD::make('command.command', __('Имя'))
                 ->sort()
                 ->cantHide()
                 ->filter(Input::make())
                 ->render(function (StaticCommand $command) {
-                    return Link::make((string)$command->name)
+                    return Link::make((string)$command->command)
                         ->route('platform.commands.edit', $command->id);
                 }),
 
@@ -50,11 +50,11 @@ class CommandListLayout extends Table
                         ->route('platform.commands.edit', $command->id);
                 }),
 
-            TD::make('command.response', __('Название команды'))
+            TD::make('command.name', __('Название команды'))
                 ->sort()
                 ->cantHide()
                 ->render(function (StaticCommand $command) {
-                    return Link::make((string)$command->response)
+                    return Link::make((string)$command->name)
                         ->route('platform.commands.edit', $command->id);
                 }),
 

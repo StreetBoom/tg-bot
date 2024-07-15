@@ -32,7 +32,7 @@ class ChannelListLayout extends Table
                 ->cantHide()
                 ->filter(Input::make())
                 ->render(function (Channel $channel) {
-                    return Link::make((string)$channel->channel_id);
+                    return (string)$channel->channel_id;
 //                        ->route('platform.tg-users.edit', $user->id);
                 }),
 
@@ -50,7 +50,7 @@ class ChannelListLayout extends Table
                 ->cantHide()
                 ->filter(Input::make())
                 ->render(function (Channel $channel) {
-                    return Link::make((string)$channel->username);
+                    return (string)$channel->username;
 //                        ->route('platform.tg-users.edit', $user->id);
                 }),
 
@@ -66,7 +66,7 @@ class ChannelListLayout extends Table
                 ->cantHide()
                 ->render(function (Channel $channel) {
                     $statusText = $channel->has_permissions ? 'Имеются' : 'Не имеются';
-                    return Link::make($statusText);
+                    return $statusText;
 
                 }),
 

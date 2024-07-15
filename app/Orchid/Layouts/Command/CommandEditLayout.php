@@ -20,7 +20,7 @@ class CommandEditLayout extends Rows
     public function fields(): array
     {
         return [
-            Input::make('command.name')
+            Input::make('command.command')
                 ->title('Команда')
                 ->placeholder('Введите имя команды')
                 ->required(),
@@ -32,7 +32,7 @@ class CommandEditLayout extends Rows
                 ->maxlength(500)
                 ->required(),
 
-            TextArea::make('command.response')
+            TextArea::make('command.name')
                 ->title('Название команды')
                 ->placeholder('Введите название команды, название будет выводиться в меню. (Оставьте пустым если не хотите чтобы команды выводилась в меню)')
                 ->rows(3)

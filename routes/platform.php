@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Orchid\Screens\Channel\ChannelDetailScreen;
 use App\Orchid\Screens\Channel\ChannelListScreen;
+use App\Orchid\Screens\Channel\TelegramChannelDetailScreen;
 use App\Orchid\Screens\Channel\UserCardScreen;
 use App\Orchid\Screens\Command\CommandEditScreen;
 use App\Orchid\Screens\Command\CommandListScreen;
@@ -76,7 +77,6 @@ Route::screen('tg-users', TelegramUserListScreen::class)
 Route::screen('tg-user/{user}/detail', TelegramUserDetailScreen::class)
     ->name('platform.tg-users.detail');
 
-
 //// Tg users edit
 //Route::screen('tg-users/{user}/edit', TelegramUserEditScreen::class)
 //    ->name('platform.tg-users.edit')
@@ -103,9 +103,8 @@ Route::screen('channels', ChannelListScreen::class)
             ->push('Каналы', route('platform.channels'));
     });
 
-Route::screen('channels/{channel}/detail', ChannelDetailScreen::class)
+Route::screen('channels/{channel}/detail', TelegramChannelDetailScreen::class)
     ->name('platform.channels.detail');
-
 
 // Main
         Route::screen('/main', PlatformScreen::class)

@@ -47,6 +47,14 @@ class TelegramUserDetailScreen extends Screen
     {
         return [
             Layout::legend('user', [
+                Sight::make('avatar', 'Изображение пользователя')
+                    ->render(function (TelegramUser $user) {
+                        // Убедитесь, что путь к аватару корректен и файл существует
+                        if ($user->avatar) {
+                            return "<img src='" . asset($user->avatar) . "' style='height: 100px; width: auto;'>";
+                        }
+                        return 'Нет изображения'; // Возвращаем этот текст, если изображение отсутствует
+                    }),
                 Sight::make('name', 'Имя'),
                 Sight::make('telegram_id', 'Telegram ID'),
                 Sight::make('username', 'Username'),

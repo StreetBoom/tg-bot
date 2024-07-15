@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('static_commands', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('command')->unique();
             $table->text('message');
-            $table->text('response')->nullable();
+            $table->text('name')->nullable();
             $table->string('image')->nullable();
             $table->boolean('status')->default(false);
             $table->timestamps();

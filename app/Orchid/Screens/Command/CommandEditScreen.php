@@ -26,7 +26,7 @@ class CommandEditScreen extends Screen
      *
      * @return array
      */
-    public function query(Command $command): iterable
+    public function query(StaticCommand $command): iterable
     {
         return [
             'command'  => $command,
@@ -87,9 +87,9 @@ class CommandEditScreen extends Screen
     public function create(Request $request)
     {
         $data = $request->validate([
-            'command.name' => 'required',
+            'command.command' => 'required',
             'command.message' => 'required',
-            'command.response' => 'nullable',
+            'command.name' => 'nullable',
             'command.status' => 'required',
         ]);
 
@@ -118,15 +118,20 @@ class CommandEditScreen extends Screen
     public function save(Request $request, StaticCommand $command)
     {
         $data = $request->validate([
-            'command.name' => 'required',
+            'command.command' => 'required',
             'command.message' => 'required',
-            'command.response' => 'nullable',
+            'command.name' => 'nullable',
             'command.status' => 'required',
         ]);
 
         if ($request->hasFile('command.image')) {
+            // Удаление старого изображения
+            if ($command->image && file_exists(public_path($command->image))) {
+                unlink(public_path($command->image));
+            }
+
             $file = $request->file('command.image');
-            $filename = uniqid() . '.' . $file->getClientOriginalExtension(); // Генерация уникального имени файла
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
             $path = 'images/commands/' . $filename;
             $file->move(public_path('images/commands'), $filename);
             $data['command']['image'] = $path;
@@ -148,6 +153,11 @@ class CommandEditScreen extends Screen
     public function remove(StaticCommand $command)
     {
         try {
+            // Удаление изображения, если оно существует
+            if ($command->image && file_exists(public_path($command->image))) {
+                unlink(public_path($command->image));
+            }
+
             $command->delete();
             Toast::info(__('Команда была удалена'));
         } catch (\Exception $e) {
